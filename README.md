@@ -15,7 +15,7 @@ Hopefully this will be a pleasure to watch, as it was when I first saw it, and e
 
 # What I'll be using and trying to get out of it:
 
-* I'll just run it as a console app
+* Initially I'll run it as a console app
 * I'm keen to try it in JavaScript first, and then maybe Ruby too.
 * It has a reasonably algorithm-heavy aspect to it, which I haven't done for a while
 * I may try and add something a little unusual to it, maybe some more randomness after the initial population
