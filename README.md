@@ -1,7 +1,7 @@
 # Conway-game
 My version of the classic petri-dish life simulation
 
-*** Having been shown this cool life simulation app early on in my time at Enspiral Dev Academy, I'm keen to have a go at coding it myself.
+Having been shown this cool life simulation app early on in my time at Enspiral Dev Academy, I'm keen to have a go at coding it myself.
 
 # Basic tenets are:
 * cells are randomly generated at first, either dead or alive.
