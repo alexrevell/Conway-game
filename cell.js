@@ -5,4 +5,9 @@ function Cell() {
 Cell.prototype.die = function() {
   // make alive false
   this.alive = false
-};
+}
+
+Cell.prototype.awaken = function() {
+  // make alive true
+  this.alive = true
+}
