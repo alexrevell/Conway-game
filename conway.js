@@ -15,13 +15,8 @@ Cell.prototype.awaken = function() {
 
 function Conway(size) {
   this.size = size
-  this.grid = new Array()
-  for (var i = 0; i < this.size; i++) {
-    new Array(this.size)
-    for (var j = 0; j < this.size; j++) {
-     new Cell()
-   }
-  }
+  this.grid = this.generateGrid()
+
 }
 
 Conway.prototype.start = function() {
@@ -31,6 +26,14 @@ Conway.prototype.start = function() {
 
 Conway.prototype.generategrid = function() {
   // generate grid
+  for (var i = 0; i < this.size; i++) {
+    var row = []
+    this.grid[i] = new Array(this.size)
+    for (var j = 0; j < this.size; j++) {
+      console.log("in column")
+     this.grid[i][j] = new Cell()
+   }
+  }
 
 }
 
@@ -58,9 +61,9 @@ Conway.prototype.renderCells = function() {
   // render updated grid cells
   this.grid.forEach(function(cell){
     if (cell.alive === true){
-      return cell = "X|"
+      console.log("X|")
     } else {
-      return cell = " |"
+      console.log(" |")
     }
   })
   console.log(this.grid)
