@@ -26,7 +26,6 @@ Conway.prototype.start = function() {
 }
 
 Conway.prototype.generateGrid = function() {
-  // generate grid
   this.grid = []
   for (var i = 0; i < this.size; i++) {
     var row = []
@@ -39,17 +38,11 @@ Conway.prototype.generateGrid = function() {
   return this.grid
 }
 
-Conway.prototype.populategrid = function() {
-  // populate grid
-
-}
-
 Conway.prototype.turnOfLife = function() {
   // each turn:
     // count cell neighbours
     // update cells (cell.awaken/cell.die)
     // render grid of cells
-
 }
 
 Conway.prototype.countNeighbours = function(){
