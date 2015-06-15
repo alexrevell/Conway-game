@@ -24,17 +24,18 @@ Conway.prototype.start = function() {
 
 }
 
-Conway.prototype.generategrid = function() {
+Conway.prototype.generateGrid = function() {
   // generate grid
+  this.grid = []
   for (var i = 0; i < this.size; i++) {
     var row = []
-    this.grid[i] = new Array(this.size)
     for (var j = 0; j < this.size; j++) {
-      console.log("in column")
-     this.grid[i][j] = new Cell()
-   }
+      var cell = new Cell()
+      row.push(cell)
+    }
+    this.grid.push(row)
   }
-
+  return this.grid
 }
 
 Conway.prototype.populategrid = function() {
@@ -44,6 +45,9 @@ Conway.prototype.populategrid = function() {
 
 Conway.prototype.turnOfLife = function() {
   // each turn:
+    // count cell neighbours
+    // update cells (cell.awaken/cell.die)
+    // render grid of cells
 
 }
 
@@ -57,17 +61,20 @@ Conway.prototype.updateCells = function() {
 
 }
 
-Conway.prototype.renderCells = function() {
-  // render updated grid cells
-  this.grid.forEach(function(cell){
-    if (cell.alive === true){
-      console.log("X|")
-    } else {
-      console.log(" |")
-    }
+Conway.prototype.renderGrid = function() {
+  // render grid cells
+  this.grid.forEach(function(row, r){
+    var rowSegment = ""
+    row.forEach(function(col, c){
+      if (this.grid[r][c].alive){
+        rowSegment += "X|"
+      } else {
+        rowSegment += " |"
+      }
+    })
+    console.log("rowSegment", rowSegment)
   })
-  console.log(this.grid)
 }
 
 var conway = new Conway(10)
-conway.renderCells
+conway.renderGrid()
