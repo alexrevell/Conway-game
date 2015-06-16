@@ -1,5 +1,6 @@
 function Cell() {
   this.alive = (0.7 > Math.random() ? true : false)
+  this.neighbours = 0
 }
 
 Cell.prototype.die = function() {
@@ -17,7 +18,7 @@ Cell.prototype.awaken = function() {
 function Conway(size) {
   this.size = size
   this.grid = this.generateGrid()
-
+  this.directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]
 }
 
 Conway.prototype.start = function() {
@@ -41,17 +42,45 @@ Conway.prototype.generateGrid = function() {
 Conway.prototype.turnOfLife = function() {
   // each turn:
     // count cell neighbours
+      // call on each cell
     // update cells (cell.awaken/cell.die)
+      // call on each cell
     // render grid of cells
 }
 
-Conway.prototype.countNeighbours = function(){
-  // count neighbours for each cell
+Conway.prototype.countNeighboursForCell = function(r, c) {
+  // count neighbours for cell
+  var cell = this.grid[r][c]
+  cell.neighbours = 0
+  this.directions.forEach(function(direction, index){
+    console.log("this grid", this.grid)
+    console.log("direction", direction, "index", index)
+    if (this.grid[r + direction[0]][c + direction[1]].alive) {
+      console.log("cell " + r + " " + c + " neighbours", cell.neighbours)
+      cell.neighbours += 1
+    }
+  })
+  // for (var i = 0; i < this.directions.length; i++) {
+  //   for (var j = 0; j < this.directions.length; j++) {
+  //     if (this.grid[i + r][j + c].alive) {
+  //       console.log("cell " + r + " " + c + " neighbours", cell.neighbours)
+  //       cell.neighbours += 1
+  //     }
+  //   }
+  // }
+  // return cell.neighbours
+}
 
+Conway.prototype.countAllNeighbours = function() {
+  // call countNeighboursForCell for every cell
+}
+
+Conway.prototype.updateCell = function(r, c) {
+  // update individual cell dead or living state
 }
 
 Conway.prototype.updateCells = function() {
-  // update cells
+  // update all cells via updateCell method
 
 }
 
@@ -72,3 +101,4 @@ Conway.prototype.renderGrid = function() {
 
 var conway = new Conway(10)
 conway.renderGrid()
+conway.countNeighboursForCell(2,2)
