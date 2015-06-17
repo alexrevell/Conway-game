@@ -51,31 +51,17 @@ Conway.prototype.turnOfLife = function() {
 Conway.prototype.countNeighboursForCell = function(r, c) {
   // count neighbours for cell
   var cell = this.grid[r][c]
-  // this.directions.forEach(function(direction){
-    // if ((this.grid[r + direction[0]][c + direction[1]]).alive) {
-    //   console.log("cell " + r + " " + c + " neighbours", cell.neighbours)
-    //   cell.neighbours += 1
-    // }
-  // })
 
-  for (var i = this.directions.length - 1; i >= 0; i--) {
+  for (var i = 0; i < this.directions.length; i++) {
     var dr = this.directions[i][0]
     var dc = this.directions[i][1]
     if (this.grid[r + dr][c + dc].alive) {
-      console.log("cell neighbours", cell.neighbours)
       cell.neighbours += 1
     }
+    console.log("cell neighbours", cell.neighbours)
   }
+  return cell.neighbours
 
-  // for (var i = 0; i < this.directions.length; i++) {
-  //   for (var j = 0; j < this.directions.length; j++) {
-  //     if (this.grid[i + r][j + c].alive) {
-  //       console.log("cell " + r + " " + c + " neighbours", cell.neighbours)
-  //       cell.neighbours += 1
-  //     }
-  //   }
-  // }
-  // return cell.neighbours
 }
 
 Conway.prototype.countAllNeighbours = function() {
