@@ -67,7 +67,7 @@ Conway.prototype.countNeighboursForCell = function(r, c) {
       }
     }
   }
-  console.log(cell)
+  // console.log("cell neighbours", cell.neighbours)
   return cell.neighbours
 }
 
@@ -82,14 +82,37 @@ Conway.prototype.countAllNeighbours = function() {
 
 Conway.prototype.updateCell = function(r, c) {
   // update individual cell dead or living state
+  var cell = this.grid[r][c]
+  // console.log("cell before updating", cell)
+  // if cell alive
+  if (cell.alive) {
+    if (cell.neighbours < 2) {
+      cell.alive = false
+    } else if (cell.neighbours > 3) {
+      cell.alive = false
+    }
+  }
+  // if cell dead
+  else if (!cell.alive) {
+    if (cell.neighbours === 3) {
+      cell.alive = true
+    }
+  }
+  // console.log("cell after updating", cell)
+  return cell
 }
 
 Conway.prototype.updateCells = function() {
   // update all cells via updateCell method
-
+  for (var i = 0; i < this.size; i++) {
+    for (var j = 0; j < this.size; j++) {
+      this.updateCell( i, j )
+    }
+  }
 }
 
 Conway.prototype.renderGrid = function() {
+  // clear screen each turn
   // render grid cells
   for (var i = 0; i < this.size; i++) {
     var rowSegment = ""
@@ -107,5 +130,6 @@ Conway.prototype.renderGrid = function() {
 var conway = new Conway(10)
 conway.generateGrid()
 conway.renderGrid()
-conway.countNeighboursForCell(0,9)
 conway.countAllNeighbours()
+conway.updateCells()
+conway.renderGrid()
