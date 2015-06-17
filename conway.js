@@ -24,6 +24,7 @@ function Conway(size) {
 Conway.prototype.start = function() {
   // start game by populating grid
 
+
 }
 
 Conway.prototype.generateGrid = function() {
@@ -81,9 +82,7 @@ Conway.prototype.countAllNeighbours = function() {
 }
 
 Conway.prototype.updateCell = function(r, c) {
-  // update individual cell dead or living state
   var cell = this.grid[r][c]
-  // console.log("cell before updating", cell)
   // if cell alive
   if (cell.alive) {
     if (cell.neighbours < 2) {
@@ -98,7 +97,6 @@ Conway.prototype.updateCell = function(r, c) {
       cell.alive = true
     }
   }
-  // console.log("cell after updating", cell)
   return cell
 }
 
@@ -129,6 +127,9 @@ Conway.prototype.renderGrid = function() {
 
 var conway = new Conway(10)
 conway.generateGrid()
+conway.renderGrid()
+conway.countAllNeighbours()
+conway.updateCells()
 conway.renderGrid()
 conway.countAllNeighbours()
 conway.updateCells()
