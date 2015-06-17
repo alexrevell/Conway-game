@@ -56,7 +56,6 @@ Conway.prototype.inBounds = function(r, c) {
 Conway.prototype.countNeighboursForCell = function(r, c) {
   // count neighbours for cell
   var cell = this.grid[r][c]
-  console.log(cell)
   cell.neighbours = 0
   for (var i = 0; i < this.directions.length; i++) {
     var dr = this.directions[i][0]
@@ -108,5 +107,5 @@ Conway.prototype.renderGrid = function() {
 var conway = new Conway(10)
 conway.generateGrid()
 conway.renderGrid()
-conway.countNeighboursForCell(0,0)
-// conway.countAllNeighbours()
+conway.countNeighboursForCell(0,9)
+conway.countAllNeighbours()
