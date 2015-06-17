@@ -1,4 +1,4 @@
-function Cell() {
+    function Cell() {
   this.alive = (0.7 > Math.random() ? true : false)
   this.neighbours = 0
 }
@@ -61,9 +61,11 @@ Conway.prototype.countNeighboursForCell = function(r, c) {
   for (var i = 0; i < this.directions.length; i++) {
     var dr = this.directions[i][0]
     var dc = this.directions[i][1]
-    var checkCell = this.grid[r + dr][c + dc]
-    if (checkCell.alive && checkCell.inBounds) {
-      cell.neighbours += 1
+    if (this.inBounds(r + dr, c + dc)) {
+      var checkCell = this.grid[r + dr][c + dc]
+      if (checkCell.alive) {
+        cell.neighbours += 1
+      }
     }
   }
   console.log(cell)
@@ -104,6 +106,7 @@ Conway.prototype.renderGrid = function() {
 }
 
 var conway = new Conway(10)
+conway.generateGrid()
 conway.renderGrid()
-conway.countNeighboursForCell(0,2)
+conway.countNeighboursForCell(0,0)
 // conway.countAllNeighbours()
