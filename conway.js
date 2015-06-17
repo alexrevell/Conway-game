@@ -48,24 +48,35 @@ Conway.prototype.turnOfLife = function() {
     // render grid of cells
 }
 
+Conway.prototype.inBounds = function(r, c) {
+  // check if cell is within limits of grid size
+ return r >= 0 && r < this.size && c >= 0 && c < this.size
+}
+
 Conway.prototype.countNeighboursForCell = function(r, c) {
   // count neighbours for cell
   var cell = this.grid[r][c]
-
+  console.log(cell)
+  cell.neighbours = 0
   for (var i = 0; i < this.directions.length; i++) {
     var dr = this.directions[i][0]
     var dc = this.directions[i][1]
-    if (this.grid[r + dr][c + dc].alive) {
+    var checkCell = this.grid[r + dr][c + dc]
+    if (checkCell.alive && checkCell.inBounds) {
       cell.neighbours += 1
     }
-    console.log("cell neighbours", cell.neighbours)
   }
+  console.log(cell)
   return cell.neighbours
-
 }
 
 Conway.prototype.countAllNeighbours = function() {
   // call countNeighboursForCell for every cell
+  for (var i = 0; i < this.size; i++) {
+    for (var j = 0; j < this.size; j++) {
+      this.countNeighboursForCell( i, j )
+    }
+  }
 }
 
 Conway.prototype.updateCell = function(r, c) {
@@ -83,7 +94,7 @@ Conway.prototype.renderGrid = function() {
     var rowSegment = ""
     for (var j = 0; j < this.size; j++) {
       if (this.grid[i][j].alive){
-        rowSegment += "X|"
+        rowSegment += "O|"
       } else {
         rowSegment += " |"
       }
@@ -94,4 +105,5 @@ Conway.prototype.renderGrid = function() {
 
 var conway = new Conway(10)
 conway.renderGrid()
-conway.countNeighboursForCell(2,2)
+conway.countNeighboursForCell(0,2)
+// conway.countAllNeighbours()
