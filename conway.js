@@ -23,8 +23,13 @@ function Conway(size) {
 
 Conway.prototype.start = function() {
   // start game by generating grid
+  // this.generateGrid()
   // first turn of life -
     // sequence of counting neighbours etc...
+  setInterval(function(){
+    this.turnOfLife()
+  })
+
 
 }
 
@@ -128,11 +133,12 @@ Conway.prototype.renderGrid = function() {
 }
 
 var conway = new Conway(10)
-conway.generateGrid()
-conway.renderGrid()
-conway.countAllNeighbours()
-conway.updateAllCells()
-conway.renderGrid()
-conway.countAllNeighbours()
-conway.updateAllCells()
-conway.renderGrid()
+conway.start()
+// conway.generateGrid()
+// conway.renderGrid()
+// conway.countAllNeighbours()
+// conway.updateAllCells()
+// conway.renderGrid()
+// conway.countAllNeighbours()
+// conway.updateAllCells()
+// conway.renderGrid()
