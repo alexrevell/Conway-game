@@ -1,4 +1,4 @@
-    function Cell() {
+function Cell() {
   this.alive = (0.5 > Math.random() ? true : false)
   this.neighbours = 0
 }
@@ -13,24 +13,14 @@ Cell.prototype.awaken = function() {
   this.alive = true
 }
 
-
-
 function Conway(size) {
   this.size = size
   this.grid = this.generateGrid()
   this.directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]
 }
 
-Conway.prototype.start = function() {
-  // start game by generating grid
-  // this.generateGrid() => dealt with by this.grid in initialisation
-  // first turn of life -
-    // sequence of counting neighbours etc...
-  // repeat at interval of .... 50ms?
-
-}
-
 Conway.prototype.generateGrid = function() {
+
   this.grid = []
   for (var i = 0; i < this.size; i++) {
     var row = []
@@ -44,20 +34,16 @@ Conway.prototype.generateGrid = function() {
 }
 
 Conway.prototype.turnOfLife = function() {
-  // each turn:
+
     this.countAllNeighbours()
-      // count cell neighbours
-        // call on each cell
     this.updateAllCells()
-      // update cells (cell.awaken/cell.die)
-        // call on each cell
     this.renderGrid()
-      // render grid of cells
 }
 
 Conway.prototype.inBounds = function(r, c) {
-  // check if cell is within limits of grid size
+
  return r >= 0 && r < this.size && c >= 0 && c < this.size
+
 }
 
 Conway.prototype.countNeighboursForCell = function(r, c) {
@@ -77,6 +63,7 @@ Conway.prototype.countNeighboursForCell = function(r, c) {
 }
 
 Conway.prototype.countAllNeighbours = function() {
+
   for (var i = 0; i < this.size; i++) {
     for (var j = 0; j < this.size; j++) {
       this.countNeighboursForCell( i, j )
@@ -85,6 +72,7 @@ Conway.prototype.countAllNeighbours = function() {
 }
 
 Conway.prototype.updateCell = function(r, c) {
+
   var cell = this.grid[r][c]
   if (cell.alive) {
     if (cell.neighbours < 2) {
@@ -98,11 +86,10 @@ Conway.prototype.updateCell = function(r, c) {
       cell.alive = true
     }
   }
-  // return cell
 }
 
 Conway.prototype.updateAllCells = function() {
-  // update all cells via updateCell method
+
   for (var i = 0; i < this.size; i++) {
     for (var j = 0; j < this.size; j++) {
       this.updateCell( i, j )
@@ -112,7 +99,6 @@ Conway.prototype.updateAllCells = function() {
 
 Conway.prototype.renderGrid = function() {
 
-  // clear screen each turn
   console.log('\033[2J')
 
   for (var i = 0; i < this.size; i++) {
