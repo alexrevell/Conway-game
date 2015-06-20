@@ -22,6 +22,7 @@ function Conway(size) {
 Conway.prototype.generateGrid = function() {
 
   this.grid = []
+
   for (var i = 0; i < this.size; i++) {
     var row = []
     for (var j = 0; j < this.size; j++) {
@@ -118,4 +119,3 @@ var conway = new Conway(40)
 var interval = setInterval(function(){
     conway.turnOfLife()
   }, 90)
-
