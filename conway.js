@@ -1,5 +1,5 @@
     function Cell() {
-  this.alive = (0.7 > Math.random() ? true : false)
+  this.alive = (0.5 > Math.random() ? true : false)
   this.neighbours = 0
 }
 
@@ -98,7 +98,7 @@ Conway.prototype.updateCell = function(r, c) {
       cell.alive = true
     }
   }
-  return cell
+  // return cell
 }
 
 Conway.prototype.updateAllCells = function() {
@@ -113,31 +113,23 @@ Conway.prototype.updateAllCells = function() {
 Conway.prototype.renderGrid = function() {
 
   // clear screen each turn
-  console.log('clear')
+  console.log('\033[2J')
 
   for (var i = 0; i < this.size; i++) {
     var rowSegment = ""
     for (var j = 0; j < this.size; j++) {
       if (this.grid[i][j].alive){
-        rowSegment += "O|"
+        rowSegment += this.grid[i][j].neighbours + " "
       } else {
-        rowSegment += " |"
+        rowSegment += "  "
       }
     }
     console.log(rowSegment)
   }
 }
 
-var conway = new Conway(10)
-conway.start()
-setInterval(function(){
+var conway = new Conway(40)
+var interval = setInterval(function(){
     conway.turnOfLife()
-  }, 50)
-// conway.generateGrid()
-// conway.renderGrid()
-// conway.countAllNeighbours()
-// conway.updateAllCells()
-// conway.renderGrid()
-// conway.countAllNeighbours()
-// conway.updateAllCells()
-// conway.renderGrid()
+  }, 90)
+
