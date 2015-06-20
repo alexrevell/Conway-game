@@ -1,5 +1,5 @@
-    function Cell() {
-  this.alive = (0.7 > Math.random() ? true : false)
+function Cell() {
+  this.alive = (0.5 > Math.random() ? true : false)
   this.neighbours = 0
 }
 
@@ -13,22 +13,16 @@ Cell.prototype.awaken = function() {
   this.alive = true
 }
 
-
-
 function Conway(size) {
   this.size = size
   this.grid = this.generateGrid()
   this.directions = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]
 }
 
-Conway.prototype.start = function() {
-  // start game by populating grid
-
-
-}
-
 Conway.prototype.generateGrid = function() {
+
   this.grid = []
+
   for (var i = 0; i < this.size; i++) {
     var row = []
     for (var j = 0; j < this.size; j++) {
@@ -41,17 +35,16 @@ Conway.prototype.generateGrid = function() {
 }
 
 Conway.prototype.turnOfLife = function() {
-  // each turn:
-    // count cell neighbours
-      // call on each cell
-    // update cells (cell.awaken/cell.die)
-      // call on each cell
-    // render grid of cells
+
+    this.countAllNeighbours()
+    this.updateAllCells()
+    this.renderGrid()
 }
 
 Conway.prototype.inBounds = function(r, c) {
-  // check if cell is within limits of grid size
+
  return r >= 0 && r < this.size && c >= 0 && c < this.size
+
 }
 
 Conway.prototype.countNeighboursForCell = function(r, c) {
@@ -71,6 +64,7 @@ Conway.prototype.countNeighboursForCell = function(r, c) {
 }
 
 Conway.prototype.countAllNeighbours = function() {
+
   for (var i = 0; i < this.size; i++) {
     for (var j = 0; j < this.size; j++) {
       this.countNeighboursForCell( i, j )
@@ -79,6 +73,7 @@ Conway.prototype.countAllNeighbours = function() {
 }
 
 Conway.prototype.updateCell = function(r, c) {
+
   var cell = this.grid[r][c]
   if (cell.alive) {
     if (cell.neighbours < 2) {
@@ -92,11 +87,10 @@ Conway.prototype.updateCell = function(r, c) {
       cell.alive = true
     }
   }
-  return cell
 }
 
-Conway.prototype.updateCells = function() {
-  // update all cells via updateCell method
+Conway.prototype.updateAllCells = function() {
+
   for (var i = 0; i < this.size; i++) {
     for (var j = 0; j < this.size; j++) {
       this.updateCell( i, j )
@@ -105,27 +99,23 @@ Conway.prototype.updateCells = function() {
 }
 
 Conway.prototype.renderGrid = function() {
-  // clear screen each turn
-  // render grid cells
+
+  console.log('\033[2J')
+
   for (var i = 0; i < this.size; i++) {
     var rowSegment = ""
     for (var j = 0; j < this.size; j++) {
       if (this.grid[i][j].alive){
-        rowSegment += "O|"
+        rowSegment += this.grid[i][j].neighbours + " "
       } else {
-        rowSegment += " |"
+        rowSegment += "  "
       }
     }
     console.log(rowSegment)
   }
 }
 
-var conway = new Conway(10)
-conway.generateGrid()
-conway.renderGrid()
-conway.countAllNeighbours()
-conway.updateCells()
-conway.renderGrid()
-conway.countAllNeighbours()
-conway.updateCells()
-conway.renderGrid()
+var conway = new Conway(40)
+var interval = setInterval(function(){
+    conway.turnOfLife()
+  }, 90)
